@@ -54,6 +54,13 @@
   .tm-box-title{font-size:15px;font-weight:800;color:#12333b;letter-spacing:.04em;text-transform:uppercase;margin:0 0 16px}
   .tm-box p{margin:0 0 14px}.tm-box p:last-child{margin:0}
   .tm-aceite{display:flex;align-items:flex-start;gap:12px;margin:20px 0;padding:14px 16px;border:1px solid #e2e8ea;border-radius:12px;cursor:pointer;transition:all .2s ease;background:#fff}
+  .tm-edital{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:20px;padding:16px 20px;border:1px solid #e2e8ea;border-radius:12px;background:#fff}
+  .tm-edital-label{font-weight:800;color:#12333b;font-size:15px}
+  .tm-edital-link{display:inline-flex;align-items:center;gap:10px;color:var(--tm-teal);font-weight:700;font-size:15px;text-decoration:none;transition:color .2s ease}
+  .tm-edital-link:hover{color:var(--tm-teal-d)}
+  .tm-edital-link span{text-decoration:underline}
+  .tm-edital-link svg{flex:none;text-decoration:none}
+  .tm-edital-pdf{color:#8ba0a8;font-weight:600;text-decoration:none!important}
   .tm-aceite:hover{border-color:var(--tm-teal);background:#f0f9fb}
   .tm-aceite.tm-checked{border-color:var(--tm-teal);background:#eaf6f9}
   .tm-aceite input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:var(--tm-teal);cursor:pointer}
@@ -232,6 +239,14 @@
       <p>3. Declaro estar ciente dos requisitos exigidos para ingresso no Mestrado Profissional em Matemática em Rede Nacional (PROFMAT), bem como dos prazos, das datas e dos locais de realização das etapas do exame.</p>
       <p>4. Declaro estar ciente de que o valor da taxa de inscrição não será devolvido, salvo nas hipóteses expressamente previstas no Edital.</p>
       <p>5. Autorizo o tratamento dos meus dados pessoais para as finalidades do presente processo seletivo, nos termos da Lei nº 13.709/2018 (LGPD).</p>
+    </div>
+
+    <div class="tm-edital">
+      <span class="tm-edital-label">Edital completo</span>
+      <a class="tm-edital-link" href="/docs/edital-ena-profmat-2027.pdf" target="_blank" rel="noopener" data-testid="link-edital-pdf">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        <span>Abrir o Edital do ENA 2027 <span class="tm-edital-pdf">(PDF)</span></span>
+      </a>
     </div>
 
     <label class="tm-aceite" id="aceite-label" for="aceite-termos">
