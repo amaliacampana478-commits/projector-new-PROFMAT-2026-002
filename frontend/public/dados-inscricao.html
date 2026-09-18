@@ -256,17 +256,8 @@
     </fieldset>
 
     <fieldset class="insc-group">
-      <legend>Polo de prova</legend>
-      <div class="insc-row">
-        <div class="insc-field">
-          <label for="d-uf">UF *</label>
-          <select id="d-uf" data-testid="dados-uf"><option value="">Selecione</option><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select>
-        </div>
-        <div class="insc-field">
-          <label for="d-polo-prova">Polo *</label>
-          <select id="d-polo-prova" data-testid="dados-polo-prova" disabled><option value="">Selecione</option></select>
-        </div>
-      </div>
+      <legend>Local da prova</legend>
+      <div class="inst-note" style="margin-bottom:0">Os locais de prova do Exame Nacional de Acesso (ENA) do PROFMAT 2027 serão divulgados por cada instituição associada até o dia <b>05 de outubro de 2026</b>.</div>
     </fieldset>
 
     <fieldset class="insc-group">
@@ -510,7 +501,7 @@ em Matemática em Rede Nacional</p>
   document.addEventListener('DOMContentLoaded',function(){
     var btn=document.getElementById('bt-continuar-dados');
     if(!btn) return;
-    var ids=['d-polo-trab','d-uf','d-polo-prova'];
+    var ids=['d-polo-trab'];
     var chk=document.getElementById('d-declaro');
     function ok(){
       for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]); if(!el||!String(el.value||'').trim()) return false;}
