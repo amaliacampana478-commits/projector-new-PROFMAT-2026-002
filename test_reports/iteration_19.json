@@ -1,0 +1,50 @@
+{
+  "summary": "Frontend-only test of the mobile viewport fit fix on /inicio.html using real Playwright device emulation (iPhone 13 and Pixel 5). Also regression-tested desktop (1920x800) and quickly checked /pagamento-pix.html and /inscricao-realizada.html on mobile.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "iphone_13_inicio": {
+      "meta_viewport": "width=1300, initial-scale=0.3",
+      "scrollWidth": 1300,
+      "innerWidth": 1300,
+      "no_horizontal_scroll": true,
+      "hero_text_found": "INSCRIÇÕES PRORROGADAS. NOVA DATA DE PROVA.",
+      "hero_right_edge": 1246,
+      "hero_within_viewport": true
+    },
+    "pixel_5_inicio": {
+      "meta_viewport": "width=1300, initial-scale=0.30230769230769233",
+      "scrollWidth": 1300,
+      "innerWidth": 1300,
+      "no_horizontal_scroll": true,
+      "hero_right_edge": 1246,
+      "hero_within_viewport": true
+    },
+    "desktop_1920_inicio": {
+      "meta_viewport": "width=device-width, initial-scale=1",
+      "scrollWidth": 1920,
+      "innerWidth": 1920,
+      "renders_normally": true
+    },
+    "iphone_13_pagamento_pix": {"meta_viewport": "width=device-width, initial-scale=1", "no_horizontal_scroll": true},
+    "iphone_13_inscricao_realizada": {"meta_viewport": "width=device-width, initial-scale=1", "no_horizontal_scroll": true},
+    "pixel_5_pagamento_pix": {"meta_viewport": "width=device-width, initial-scale=1", "no_horizontal_scroll": true},
+    "pixel_5_inscricao_realizada": {"meta_viewport": "width=device-width, initial-scale=1", "no_horizontal_scroll": true}
+  },
+  "test_report_links": ["/app/tests/test_mobile_viewport.py"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "The mobile-viewport-fit script only listens to 'orientationchange' but not to 'resize'. If a user rotates from portrait->landscape, orientationchange fires; but not all browsers fire it reliably on modern devices. Adding a 'resize' listener (debounced) would make the fix more robust. Not blocking."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The mobile viewport fit fix on /inicio.html works as expected on real device emulation (iPhone 13, Pixel 5): meta rewritten to width=1300 initial-scale≈0.3, hero 'INSCRIÇÕES...' fully visible (right edge 1246 < 1300), no horizontal scroll, and desktop remains unchanged. The other pages (pagamento-pix, inscricao-realizada) use responsive layout and were fine.",
+  "rca of the issue": "Not applicable - fix verified working. Original bug was that /inicio.html is a fixed-width desktop layout (~1300-1524px) so on mobile the hero was clipped and horizontal scroll appeared. The injected script now, on width<1000px, sets meta viewport to width=1300 with initial-scale=innerWidth/1300 causing the browser to zoom out and show the entire page fitted to screen width."
+}

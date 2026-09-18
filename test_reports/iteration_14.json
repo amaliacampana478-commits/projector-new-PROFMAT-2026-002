@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend-only testing of /inscricao.html. Verified BUG FIX: no duplicated 'Escolher arquivo' button anymore. Custom .doc-file-btn is the only visible button; native file input has opacity:0 and is absolutely positioned overlaying the custom button. File-name label updates and gets 'has-file' class on selection. All ancillary form behaviors (NOME uppercase, CPF mask + invalid CPF error, DATA_NASCIMENTO mask, CELULAR mask, CEP autofill via /api/cep) work as expected.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "inscricao.html is a large single HTML file (~600 lines) mixing HTML/CSS/JS - consider splitting shared styles/scripts into external assets in public/ for maintainability, but not blocking."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bug fix for duplicated 'Escolher arquivo' button in /inscricao.html is verified working. Verified: DOC_TIPO=CNH reveals #doc-uploads; exactly 2 .doc-file-btn (Frente/Verso) visible, native file inputs #DOC_FRENTE/#DOC_VERSO have opacity=0 position=absolute overlay. Uploading a file updates #DOC_FRENTE_name text and adds 'has-file' green class. Also verified NOME uppercase, CPF mask (123.456.789-00) + 'CPF inválido' error visible, DATA_NASCIMENTO 01/01/1990 mask, CELULAR (11) 99999-8888 mask, CEP 66017000 auto-fills LOGRADOURO='AVENIDA PRESIDENTE VARGAS', BAIRRO='CAMPINA', CIDADE='BELÉM', UF='PA' via /api/cep.",
+  "rca of the issue": "The prior duplication occurred because both the styled div .doc-file-btn and the default native input[type=file] chooser were rendered visibly. Fix places the native input absolutely over the styled button with opacity:0 so only the custom button is seen while clicks still open the file dialog. A companion script updates .doc-file-name on change. Verified via DOM inspection and screenshot."
+}

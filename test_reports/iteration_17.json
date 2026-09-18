@@ -1,0 +1,18 @@
+{
+  "summary": "Frontend-only test of loading spinner overlay on /inscricao-realizada.html. Verified overlay #ir-loading-ov starts hidden (display:none), switches to display:flex immediately on clicking #btn-pagar (PAGAR INSCRIÇÃO), spinner has CSS animation __irspin, and navigation to /pagamento-pix occurs after ~1s. Regression checks confirm the comprovante still shows Número da Inscrição (2026900736), Status PENDENTE DE PAGAMENTO, Nome (GUILHERME DANTAS), CPF (217.819.007-36), Cargo (SEGUNDO OFICIAL DE NÁUTICA 2ON), and stepper is at step 5 REALIZADA.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "sessionStorage['inscricao_dados'] seeded for the comprovante regression check",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Loading overlay spinner fix on /inscricao-realizada is confirmed working. Note: /pagamento-pix currently shows 'Chave PIX não configurada' (known, out of scope)."
+}

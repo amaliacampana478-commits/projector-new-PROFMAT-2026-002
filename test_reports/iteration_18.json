@@ -1,0 +1,21 @@
+{
+  "summary": "Verified TRANSPETRO PIX 'Vaga Escolhida' bug fix. Seeded sessionStorage with the exact payload from the request (VAGA cargo name + __vaga_label containing cargo+edital+ANEXO), navigated directly to /pagamento-pix and /inscricao-realizada. All three test cases PASS: (1) #p-vaga on /pagamento-pix shows ONLY 'ÊNFASE 4: DUTOS E TERMINAIS' (no TRANSPETRO/PSP, no ANEXO III, no 2026.3); (2) #p-valor = 'R$ 81,50' and BRCode/copia-e-cola generated with '5405 81.50'; (3) /inscricao-realizada shows Cargo Escolhido = 'ÊNFASE 4: DUTOS E TERMINAIS' with Status PENDENTE DE PAGAMENTO. Consistent between both pages. Code check: pagamento-pix.html line 266 uses `d.VAGA || d.__cargo_titulo || d.__vaga_label` — correct precedence.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "pagamento-pix.html falls back to __vaga_label if VAGA/__cargo_titulo missing — for legacy sessions this could still display the long label. Consider dropping __vaga_label fallback entirely to be safe."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "sessionStorage['inscricao_dados'] seeded with VAGA + __vaga_label to validate the fix in isolation.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bug fix on #p-vaga confirmed via direct sessionStorage seeding on preview URL. QR/BRCode contains '81.50'. Both /pagamento-pix and /inscricao-realizada now show identical cargo name.",
+  "rca of the issue": "Previously #p-vaga was populated with d.__vaga_label (cargo + edital + anexo). Fix: use d.VAGA which stores only the cargo/ênfase name — matches /inscricao-realizada #r-vaga."
+}
