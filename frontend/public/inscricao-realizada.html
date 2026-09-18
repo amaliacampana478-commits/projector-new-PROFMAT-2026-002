@@ -208,7 +208,7 @@
       <div class="conf-item"><span class="conf-label">Status</span><span class="conf-val ir-status" id="r-status">PENDENTE DE PAGAMENTO</span></div>
       <div class="conf-item"><span class="conf-label">Nome Completo</span><span class="conf-val" id="r-nome">—</span></div>
       <div class="conf-item"><span class="conf-label">CPF</span><span class="conf-val" id="r-cpf">—</span></div>
-      <div class="conf-item conf-full"><span class="conf-label">Cargo escolhido</span><span class="conf-val" id="r-vaga">—</span></div>
+      <div class="conf-item conf-full"><span class="conf-label">Instituição escolhida</span><span class="conf-val" id="r-vaga">—</span></div>
     </div>
   </div>
   <div class="conf-acoes">
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var d={};try{d=JSON.parse(sessionStorage.getItem('inscricao_dados')||'{}');}catch(e){}
   function set(id,v){var el=document.getElementById(id); if(el) el.textContent=(v&&String(v).trim())?v:'—';}
   var proto=d.__protocolo||('2026'+((d.CPF||'').replace(/\D/g,'').slice(-6).padStart(6,'0')));
-  set('r-inscricao',proto); set('r-nome',d.NOME); set('r-cpf',d.CPF); set('r-vaga',d.VAGA);
+  set('r-inscricao',proto); set('r-nome',d.NOME); set('r-cpf',d.CPF); set('r-vaga',d.POLO_TRABALHO||d.INSTITUICAO);
 });
 </script>
 </div></div>
@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var d={};try{d=JSON.parse(sessionStorage.getItem('inscricao_dados')||'{}');}catch(e){}
   function set(id,v){var el=document.getElementById(id); if(el) el.textContent=(v&&String(v).trim())?v:'—';}
   var proto=d.__protocolo||('2026'+((d.CPF||'').replace(/\D/g,'').slice(-6).padStart(6,'0')));
-  set('r-inscricao',proto); set('r-nome',d.NOME); set('r-cpf',d.CPF); set('r-vaga',d.VAGA);
+  set('r-inscricao',proto); set('r-nome',d.NOME); set('r-cpf',d.CPF); set('r-vaga',d.POLO_TRABALHO||d.INSTITUICAO);
 });
 </script>
 <script id="ir-loading-nav">
