@@ -1,0 +1,21 @@
+{
+  "summary": "Verified bug fix on /confirmacao.html: script id=conf-fill correctly reads sessionStorage 'inscricao_dados' and populates all c-* spans on DOMContentLoaded. Used the ALTERNATIVE approach (page.evaluate to set sessionStorage + reload) as recommended. Empty-state test also passed: without data, all fields display '—' with no JS errors from the page.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "confirmacao.html", "issues": ["Console CSP warnings for cloudflare beacon/challenge scripts (external, not app code) - informational only"]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100%"},
+  "seed_data_creation": "Set sessionStorage 'inscricao_dados' via page.evaluate with sample payload including NOME, CPF, DATA_NASCIMENTO, SEXO, DOC_TIPO, DOC_FRENTE_NAME, DOC_VERSO_NAME, CELULAR, EMAIL, CEP, LOGRADOURO, NUMERO, BAIRRO, CIDADE, UF, POLO_TRABALHO, INSTITUICAO, INSTITUICAO_UF, INSTITUICAO_CIDADE, cotas_negros, PORTADOR_DEFICIENCIA, atendimento_especial.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bug fix (conf-fill script populating spans from sessionStorage) is confirmed working. Empty state: all 21 c-* spans show '—'. Filled state verified spans: c-nome=Fulano Teste, c-cpf=529.982.247-25, c-data=01/01/1990, c-sexo=MASCULINO, c-doc=RG, c-arquivos='frente.png, verso.png', c-celular=(91)99999-9999, c-email=teste@teste.com, c-cep=66060-300, c-logradouro=Passagem Lizete, c-numero=100, c-bairro=Fátima, c-cidade=Belém, c-uf=PA, c-cargo-nome='UnB - Brasília/DF', c-uf-prova=DF, c-municipio-prova=Brasília, c-negros/c-pcd/c-atendimento=Não, c-complemento=— (not provided in payload, correctly shows dash).",
+  "rca of the issue": "Root cause: /confirmacao.html originally missing the DOM-fill script that reads sessionStorage 'inscricao_dados' and writes textContent to c-* spans. Fix: added <script id=conf-fill> that parses the JSON on DOMContentLoaded, maps SEXO codes ('0'->MASCULINO, '1'->FEMININO), joins DOC_FRENTE_NAME/DOC_VERSO_NAME into c-arquivos, maps booleans (cotas_negros, PORTADOR_DEFICIENCIA, atendimento_especial) to Sim/Não, and uses POLO_TRABALHO/INSTITUICAO_UF/INSTITUICAO_CIDADE for the Instituição Associada block. Verified end-to-end via sessionStorage seed + reload."
+}
