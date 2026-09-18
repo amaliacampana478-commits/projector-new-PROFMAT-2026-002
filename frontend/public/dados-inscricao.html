@@ -44,6 +44,36 @@
   .tm-card{background:#fff;border:1px solid #e6ebee;border-radius:18px;box-shadow:0 18px 44px -26px rgba(12,124,146,.45);padding:38px 44px 42px}
   .tm-title{font-size:26px;font-weight:800;color:#12333b;margin:0 0 4px}
   .insc-wrap{max-width:100%!important}
+  .inst-sub{color:#4b5a60;font-size:14px;margin:2px 0 14px;line-height:1.55}
+  .inst-note{background:#eef7fb;border:1px solid #cfe6ef;color:#2b5563;border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.55;margin-bottom:18px}
+  .inst-filters{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+  .inst-filters label{display:block;font-size:13px;font-weight:700;color:#334;margin-bottom:6px}
+  .inst-search{flex:1 1 260px;min-width:220px}
+  .inst-search input{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #cbd5db;border-radius:10px;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s}
+  .inst-search input:focus,.inst-sel select:focus{border-color:var(--tm-teal);box-shadow:0 0 0 3px rgba(12,124,146,.15)}
+  .inst-sel{flex:0 0 auto}
+  .inst-sel select{padding:12px 14px;border:1px solid #cbd5db;border-radius:10px;font-size:14px;background:#fff;min-width:180px;outline:none;transition:border-color .2s,box-shadow .2s}
+  .inst-clear{align-self:flex-end;padding:12px 16px;border:1px solid #cbd5db;background:#fff;border-radius:10px;font-size:14px;font-weight:600;color:#3d4d53;cursor:pointer;transition:all .2s}
+  .inst-clear:hover{background:#f4f8f9;border-color:#93a7ae}
+  .inst-count-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:18px 0 14px;padding-top:16px;border-top:1px solid #eceff1}
+  .inst-count{font-size:14px;color:#4b5a60}.inst-count b{color:#12333b}
+  .inst-hint{font-size:13px;color:#8ba0a8}
+  .inst-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .inst-card{border:1px solid #e2e8ea;border-radius:14px;padding:18px 20px;background:#fff;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s}
+  .inst-card:hover{border-color:var(--tm-teal);box-shadow:0 10px 26px -18px rgba(12,124,146,.6);transform:translateY(-2px)}
+  .inst-card.sel{border-color:var(--tm-teal);box-shadow:0 0 0 2px var(--tm-teal) inset;background:#f0f9fb}
+  .inst-card-top{display:flex;gap:14px;align-items:flex-start}
+  .inst-ico{flex:none;width:42px;height:42px;border-radius:10px;background:#eef2f4;color:#5b7883;display:flex;align-items:center;justify-content:center}
+  .inst-info{min-width:0}
+  .inst-sigla{font-weight:800;color:#12333b;font-size:16px}
+  .inst-loc{display:flex;align-items:center;gap:5px;color:#5b6b72;font-size:13.5px;margin-top:2px}
+  .inst-badges{display:flex;align-items:center;gap:12px;margin-top:9px;flex-wrap:wrap}
+  .inst-vagas{display:inline-flex;align-items:center;gap:5px;color:#4b5a60;font-size:13px;font-weight:600}
+  .inst-regiao{color:var(--tm-teal);font-size:12.5px;font-weight:700}
+  .inst-sep{height:1px;background:#eceff1;margin:14px 0 12px}
+  .inst-aulas{font-size:13px;color:#5b6b72;line-height:1.5}.inst-aulas b{color:#3d4d53}
+  .inst-empty{grid-column:1/-1;text-align:center;color:#8ba0a8;padding:30px;font-size:14px}
+  @media (max-width:760px){.inst-grid{grid-template-columns:1fr}.inst-sel select{min-width:0;width:100%}.inst-sel{flex:1 1 100%}}
   @media (max-width:640px){.tm-card{padding:24px 20px 28px}.tm-title{font-size:22px}}
 </style>
 <body class="wp-singular page-template-default page page-id-2864 wp-custom-logo wp-embed-responsive wp-theme-generatepress wp-child-theme-profmat-2026 no-sidebar nav-float-right one-container header-aligned-left dropdown-hover using-mouse" itemtype=https://schema.org/WebPage itemscope><header class="site-header has-inline-mobile-toggle" id=masthead aria-label=Site itemtype=https://schema.org/WPHeader itemscope>
@@ -224,17 +254,33 @@
     </fieldset>
 
     <fieldset class="insc-group">
-      <legend>Polo de trabalho</legend>
-      <div class="insc-row">
-        <div class="insc-field">
-          <label for="d-macropolo">Macropolo *</label>
-          <select id="d-macropolo" data-testid="dados-macropolo"><option value="">Selecione</option><option value="NACIONAL">NACIONAL</option></select>
+      <legend>Instituição Associada</legend>
+      <p class="inst-sub">Selecione a instituição na qual pretende cursar o PROFMAT. Observe atentamente a cidade, a quantidade de vagas e os dias e turnos das aulas.</p>
+      <div class="inst-note">A Instituição Associada pode ser alterada até 21/09/2026 às 17h00 (horário de Brasília), mesmo depois da finalização ou do pagamento. Se a inscrição já estiver finalizada, a alteração fará com que ela precise ser finalizada novamente.</div>
+      <div class="inst-filters">
+        <div class="inst-search">
+          <label for="inst-busca">Buscar instituição</label>
+          <input type="text" id="inst-busca" data-testid="inst-busca" placeholder="Cidade, UF, região ou sigla...">
         </div>
-        <div class="insc-field">
-          <label for="d-polo-trab">Polo *</label>
-          <select id="d-polo-trab" data-testid="dados-polo-trabalho" disabled><option value="">Selecione</option></select>
+        <div class="inst-sel">
+          <label for="inst-uf">UF</label>
+          <select id="inst-uf" data-testid="inst-uf"><option value="">Todas as UFs</option></select>
         </div>
+        <div class="inst-sel">
+          <label for="inst-regiao">Região</label>
+          <select id="inst-regiao" data-testid="inst-regiao">
+            <option value="">Todas as regiões</option>
+            <option>Centro-Oeste</option><option>Nordeste</option><option>Norte</option><option>Sudeste</option><option>Sul</option>
+          </select>
+        </div>
+        <button type="button" id="inst-limpar" data-testid="inst-limpar" class="inst-clear">Limpar filtros</button>
       </div>
+      <div class="inst-count-row">
+        <span class="inst-count"><b id="inst-count">0</b> instituições encontradas</span>
+        <span class="inst-hint">Selecione qualquer ponto do cartão da instituição.</span>
+      </div>
+      <div class="inst-grid" id="inst-grid" data-testid="inst-grid"></div>
+      <input type="hidden" id="d-polo-trab" data-testid="dados-instituicao-hidden">
     </fieldset>
 
     <fieldset class="insc-group">
@@ -492,7 +538,7 @@ em Matemática em Rede Nacional</p>
   document.addEventListener('DOMContentLoaded',function(){
     var btn=document.getElementById('bt-continuar-dados');
     if(!btn) return;
-    var ids=['d-edital','d-cargo','d-macropolo','d-polo-trab','d-uf','d-polo-prova'];
+    var ids=['d-edital','d-cargo','d-polo-trab','d-uf','d-polo-prova'];
     var chk=document.getElementById('d-declaro');
     function ok(){
       for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]); if(!el||!String(el.value||'').trim()) return false;}
@@ -552,5 +598,140 @@ document.addEventListener('DOMContentLoaded',function(){
     setTimeout(function(){ window.location.href='/confirmacao.html'; }, 1000);
   });
 });
+</script><script id="inst-selector">
+(function(){
+  var INST=[
+    {s:'UnB',c:'Brasília',u:'DF',r:'Centro-Oeste',v:15,a:'Terça-feira (Tarde / Noite), Sexta-feira (Tarde / Noite), Sábado (Manhã)'},
+    {s:'UFCAT',c:'Catalão',u:'GO',r:'Centro-Oeste',v:16,a:'Sábado (Manhã / Tarde)'},
+    {s:'UFG',c:'Goiânia',u:'GO',r:'Centro-Oeste',v:30,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFJ',c:'Jataí',u:'GO',r:'Centro-Oeste',v:13,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFMS',c:'Campo Grande',u:'MS',r:'Centro-Oeste',v:15,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UEMS',c:'Dourados',u:'MS',r:'Centro-Oeste',v:12,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFGD',c:'Dourados',u:'MS',r:'Centro-Oeste',v:10,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFMS',c:'Três Lagoas',u:'MS',r:'Centro-Oeste',v:10,a:'Sábado (Manhã / Tarde)'},
+    {s:'UNEMAT',c:'Barra do Bugres',u:'MT',r:'Centro-Oeste',v:15,a:'Quinta-feira (Manhã / Tarde), Sexta-feira (Manhã / Tarde)'},
+    {s:'UFMT',c:'Barra do Garças',u:'MT',r:'Centro-Oeste',v:15,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFMT',c:'Cuiabá',u:'MT',r:'Centro-Oeste',v:25,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFR',c:'Rondonópolis',u:'MT',r:'Centro-Oeste',v:9,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UNEMAT',c:'Sinop',u:'MT',r:'Centro-Oeste',v:15,a:'Sexta-feira (Tarde), Sábado (Manhã)'},
+    {s:'UFAL',c:'Arapiraca',u:'AL',r:'Nordeste',v:20,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFAL',c:'Maceió',u:'AL',r:'Nordeste',v:30,a:'Quinta-feira (Noite), Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã)'},
+    {s:'UFOB',c:'Barreiras',u:'BA',r:'Nordeste',v:18,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFRB',c:'Cruz das Almas',u:'BA',r:'Nordeste',v:16,a:'Quinta-feira (Manhã / Tarde), Sexta-feira (Manhã / Tarde)'},
+    {s:'UEFS',c:'Feira de Santana',u:'BA',r:'Nordeste',v:18,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã)'},
+    {s:'UESC',c:'Ilhéus',u:'BA',r:'Nordeste',v:18,a:'Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UNIVASF',c:'Juazeiro',u:'BA',r:'Nordeste',v:20,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFBA',c:'Salvador',u:'BA',r:'Nordeste',v:20,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UESB',c:'Vitória da Conquista',u:'BA',r:'Nordeste',v:25,a:'Sexta-feira (Manhã), Sábado (Manhã)'},
+    {s:'UECE',c:'Fortaleza',u:'CE',r:'Nordeste',v:15,a:'Terça-feira (Noite), Quinta-feira (Noite)'},
+    {s:'UFC',c:'Fortaleza',u:'CE',r:'Nordeste',v:10,a:'Quarta-feira (Manhã / Tarde)'},
+    {s:'UFCA',c:'Juazeiro do Norte',u:'CE',r:'Nordeste',v:20,a:'Terça-feira (Manhã / Tarde)'},
+    {s:'URCA',c:'Juazeiro do Norte',u:'CE',r:'Nordeste',v:10,a:'Quinta-feira (Manhã)'},
+    {s:'UECE',c:'Quixadá',u:'CE',r:'Nordeste',v:15,a:'Quarta-feira (Manhã / Tarde)'},
+    {s:'UNILAB',c:'Redenção',u:'CE',r:'Nordeste',v:15,a:'Quinta-feira (Manhã / Tarde), Sexta-feira (Manhã / Tarde), Sábado (Manhã / Tarde)'},
+    {s:'UVA',c:'Sobral',u:'CE',r:'Nordeste',v:11,a:'Quarta-feira (Manhã / Tarde)'},
+    {s:'UEMA',c:'Balsas',u:'MA',r:'Nordeste',v:16,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã)'},
+    {s:'UEMA',c:'São Luís',u:'MA',r:'Nordeste',v:24,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã)'},
+    {s:'UFMA',c:'São Luís',u:'MA',r:'Nordeste',v:22,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã)'},
+    {s:'UEPB',c:'Campina Grande',u:'PB',r:'Nordeste',v:22,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFCG',c:'Campina Grande',u:'PB',r:'Nordeste',v:20,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFPB',c:'João Pessoa',u:'PB',r:'Nordeste',v:15,a:'Sexta-feira (Tarde / Noite)'},
+    {s:'UFPE',c:'Caruaru',u:'PE',r:'Nordeste',v:10,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFRPE',c:'Recife',u:'PE',r:'Nordeste',v:30,a:'Sexta-feira (Manhã / Tarde / Noite)'},
+    {s:'IFPI',c:'Floriano',u:'PI',r:'Nordeste',v:30,a:'Sexta-feira (Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UFDPar',c:'Parnaíba',u:'PI',r:'Nordeste',v:10,a:'Quinta-feira (Tarde), Sexta-feira (Tarde)'},
+    {s:'UESPI',c:'Teresina',u:'PI',r:'Nordeste',v:20,a:'Quinta-feira (Manhã / Tarde), Sexta-feira (Manhã / Tarde)'},
+    {s:'UFPI',c:'Teresina',u:'PI',r:'Nordeste',v:20,a:'Quinta-feira (Manhã / Tarde / Noite), Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UFERSA',c:'Mossoró',u:'RN',r:'Nordeste',v:30,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã / Tarde)'},
+    {s:'UFRN',c:'Natal',u:'RN',r:'Nordeste',v:15,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'FUFS',c:'Aracaju',u:'SE',r:'Nordeste',v:20,a:'Quinta-feira (Manhã / Tarde / Noite), Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'FUFS',c:'Itabaiana',u:'SE',r:'Nordeste',v:10,a:'Quinta-feira (Tarde / Noite), Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UFAC',c:'Rio Branco',u:'AC',r:'Norte',v:15,a:'Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UEA',c:'Manaus',u:'AM',r:'Norte',v:20,a:'Terça-feira (Noite), Quinta-feira (Noite), Sábado (Manhã)'},
+    {s:'UNIFAP',c:'Macapá',u:'AP',r:'Norte',v:13,a:'Segunda-feira a Sábado (Manhã)'},
+    {s:'UFPA',c:'Abaetetuba',u:'PA',r:'Norte',v:20,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFPA',c:'Belém',u:'PA',r:'Norte',v:22,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã / Tarde)'},
+    {s:'UFPA',c:'Bragança',u:'PA',r:'Norte',v:15,a:'Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UFPA',c:'Cametá',u:'PA',r:'Norte',v:14,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFPA',c:'Castanhal',u:'PA',r:'Norte',v:15,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã / Tarde)'},
+    {s:'UFOPA',c:'Santarém',u:'PA',r:'Norte',v:13,a:'Sexta-feira (Manhã / Tarde), Sábado (Manhã / Tarde)'},
+    {s:'UNIR',c:'Ji-Paraná',u:'RO',r:'Norte',v:10,a:'Quinta-feira (Noite), Sexta-feira (Tarde / Noite), Sábado (Manhã)'},
+    {s:'UNIR',c:'Porto Velho',u:'RO',r:'Norte',v:15,a:'Quinta-feira (Manhã / Tarde), Sexta-feira (Manhã / Tarde)'},
+    {s:'UFRR',c:'Boa Vista',u:'RR',r:'Norte',v:15,a:'Terça-feira (Manhã / Tarde), Quinta-feira (Manhã / Tarde)'},
+    {s:'UFNT',c:'Araguaína',u:'TO',r:'Norte',v:10,a:'Sexta-feira (Tarde / Noite), Sábado (Manhã)'},
+    {s:'UFT',c:'Arraias',u:'TO',r:'Norte',v:20,a:'Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã / Tarde)'},
+    {s:'UNIOESTE',c:'Cascavel',u:'PR',r:'Sul',v:15,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UTFPR',c:'Cornélio Procópio',u:'PR',r:'Sul',v:20,a:'Sábado (Manhã / Tarde)'},
+    {s:'UFPR',c:'Curitiba',u:'PR',r:'Sul',v:10,a:'Terça-feira (Tarde / Noite), Quinta-feira (Tarde / Noite)'},
+    {s:'UTFPR',c:'Curitiba',u:'PR',r:'Sul',v:30,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UEL',c:'Londrina',u:'PR',r:'Sul',v:8,a:'Quarta-feira (Manhã / Tarde)'},
+    {s:'UEM',c:'Maringá',u:'PR',r:'Sul',v:20,a:'Sexta-feira (Manhã e Tarde)'},
+    {s:'UTFPR',c:'Pato Branco',u:'PR',r:'Sul',v:10,a:'Sexta-feira (Manhã / Tarde / Noite)'},
+    {s:'UEPG',c:'Ponta Grossa',u:'PR',r:'Sul',v:13,a:'Sexta-feira (Manhã / Tarde / Noite)'},
+    {s:'UTFPR',c:'Toledo',u:'PR',r:'Sul',v:12,a:'Sexta-feira (Tarde / Noite)'},
+    {s:'UNIPAMPA',c:'Caçapava do Sul',u:'RS',r:'Sul',v:7,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'IFRS',c:'Canoas',u:'RS',r:'Sul',v:15,a:'Quarta-feira (Noite), Sexta-feira (Noite)'},
+    {s:'FURG',c:'Rio Grande',u:'RS',r:'Sul',v:8,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFSM',c:'Santa Maria',u:'RS',r:'Sul',v:10,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFSC',c:'Blumenau',u:'SC',r:'Sul',v:20,a:'Sexta-feira (Tarde / Noite)'},
+    {s:'UFFS',c:'Chapecó',u:'SC',r:'Sul',v:18,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UFSC',c:'Florianópolis',u:'SC',r:'Sul',v:15,a:'Sexta-feira (Manhã / Tarde)'},
+    {s:'UDESC',c:'Joinville',u:'SC',r:'Sul',v:14,a:'Sexta-feira (Manhã / Tarde / Noite), Sábado (Manhã)'}
+  ];
+  var grid=document.getElementById('inst-grid'); if(!grid) return;
+  var busca=document.getElementById('inst-busca'), selUF=document.getElementById('inst-uf'),
+      selReg=document.getElementById('inst-regiao'), btnLimpar=document.getElementById('inst-limpar'),
+      countEl=document.getElementById('inst-count'), hidden=document.getElementById('d-polo-trab');
+  var selectedKey=null;
+  var icoBank='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 18 0"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg>';
+  var icoPin='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+  var icoUsers='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>';
+  var ufs=INST.map(function(i){return i.u;}).filter(function(v,idx,a){return a.indexOf(v)===idx;}).sort();
+  ufs.forEach(function(u){var o=document.createElement('option');o.value=u;o.textContent=u;selUF.appendChild(o);});
+  function key(i){return i.s+'|'+i.c+'|'+i.u;}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function cardHTML(i){
+    var k=key(i), sel=(k===selectedKey?' sel':'');
+    return '<div class="inst-card'+sel+'" data-k="'+esc(k)+'" data-testid="inst-card">'
+      +'<div class="inst-card-top"><span class="inst-ico">'+icoBank+'</span>'
+      +'<div class="inst-info"><div class="inst-sigla">'+esc(i.s)+'</div>'
+      +'<div class="inst-loc">'+icoPin+' '+esc(i.c)+' /'+esc(i.u)+'</div>'
+      +'<div class="inst-badges"><span class="inst-vagas">'+icoUsers+' '+i.v+' vagas</span><span class="inst-regiao">'+esc(i.r)+'</span></div>'
+      +'</div></div><div class="inst-sep"></div>'
+      +'<div class="inst-aulas"><b>Aulas:</b> '+esc(i.a||'—')+'</div></div>';
+  }
+  function norm(s){return (s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function render(){
+    var q=norm(busca.value), uf=selUF.value, reg=selReg.value;
+    var list=INST.filter(function(i){
+      if(reg && i.r!==reg) return false;
+      if(uf && i.u!==uf) return false;
+      if(q){ if(norm(i.s+' '+i.c+' '+i.u+' '+i.r).indexOf(q)<0) return false; }
+      return true;
+    });
+    countEl.textContent=list.length;
+    grid.innerHTML = list.length ? list.map(cardHTML).join('') : '<div class="inst-empty">Nenhuma instituição encontrada com os filtros atuais.</div>';
+  }
+  grid.addEventListener('click',function(e){
+    var card=e.target.closest ? e.target.closest('.inst-card') : null; if(!card) return;
+    var k=card.getAttribute('data-k'); if(!k) return;
+    selectedKey=k;
+    var it=INST.filter(function(i){return key(i)===k;})[0];
+    if(hidden && it){
+      hidden.value=it.s+' - '+it.c+'/'+it.u;
+      try{ var d=JSON.parse(sessionStorage.getItem('inscricao_dados')||'{}');
+        d.INSTITUICAO=it.s; d.INSTITUICAO_CIDADE=it.c; d.INSTITUICAO_UF=it.u; d.INSTITUICAO_REGIAO=it.r;
+        d.INSTITUICAO_VAGAS=it.v; d.INSTITUICAO_AULAS=it.a; d.POLO_TRABALHO=hidden.value; d.MACROPOLO='NACIONAL';
+        sessionStorage.setItem('inscricao_dados',JSON.stringify(d)); }catch(err){}
+      hidden.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    render();
+  });
+  busca.addEventListener('input',render);
+  selUF.addEventListener('change',render);
+  selReg.addEventListener('change',render);
+  btnLimpar.addEventListener('click',function(){ busca.value='';selUF.value='';selReg.value='';render(); });
+  render();
+})();
 </script>
 </body></html>
