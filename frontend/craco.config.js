@@ -123,6 +123,14 @@ if (isDevServer) {
             res.sendFile(path.resolve(__dirname, "public/inscricao.html"));
             return;
           }
+          /* Página de acesso do candidato (login) */
+          if (
+            req.method === "GET" &&
+            (req.path === "/candidato" || req.path === "/candidato/" || req.path === "/candidato.html")
+          ) {
+            res.sendFile(path.resolve(__dirname, "public/candidato.html"));
+            return;
+          }
           /* Página de termos (aceite obrigatório antes da inscrição) */
           if (
             req.method === "GET" &&
