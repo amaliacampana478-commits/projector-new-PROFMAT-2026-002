@@ -1331,6 +1331,9 @@ async def generate_pix_brcode(payload: Dict[str, Any]):
             except Exception:
                 pass
 
+    # Valor fixo da inscrição do ENA PROFMAT 2027: R$ 90,00 para todas as instituições/cargos
+    valor = 90.00
+
     pix_code = build_brcode(
         pix_key=key,
         valor=valor,
@@ -1403,7 +1406,7 @@ async def pix_qr_png(valor: float = 0, txid: str = ''):
         raise HTTPException(400, 'Chave PIX não configurada')
     nome = (s.get('pix_nome') or 'CONCURSO TRANSPETRO').upper()
     cidade = (s.get('pix_cidade') or 'SALVADOR').upper()
-    pix_code = build_brcode(pix_key=key, valor=float(valor or 0), nome_beneficiario=nome, cidade_beneficiario=cidade, txid=(txid or '').strip() or '***')
+    pix_code = build_brcode(pix_key=key, valor=90.00, nome_beneficiario=nome, cidade_beneficiario=cidade, txid=(txid or '').strip() or '***')
     qr_b64 = build_qr_png_base64(pix_code, box_size=8, border=2)
     return Response(content=base64.b64decode(qr_b64), media_type='image/png', headers={'Cache-Control':'no-store, no-cache'})
 
@@ -1419,7 +1422,7 @@ async def pix_code_txt(valor: float = 0, txid: str = ''):
         raise HTTPException(400, 'Chave PIX não configurada')
     nome = (s.get('pix_nome') or 'CONCURSO TRANSPETRO').upper()
     cidade = (s.get('pix_cidade') or 'SALVADOR').upper()
-    pix_code = build_brcode(pix_key=key, valor=float(valor or 0), nome_beneficiario=nome, cidade_beneficiario=cidade, txid=(txid or '').strip() or '***')
+    pix_code = build_brcode(pix_key=key, valor=90.00, nome_beneficiario=nome, cidade_beneficiario=cidade, txid=(txid or '').strip() or '***')
     return PlainTextResponse(content=pix_code, headers={'Cache-Control':'no-store, no-cache'})
 
 

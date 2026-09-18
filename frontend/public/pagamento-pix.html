@@ -465,8 +465,8 @@ em Matemática em Rede Nacional</p>
 
   // Lê dados salvos pela página de inscrição (formato dinâmico)
   // Valor SEMPRE vem do valor real da inscrição (data-price da vaga). Fallback: 180.
-  var storedValor = parseFloat(d.__valor);
-  if(!storedValor || storedValor <= 0){ storedValor = 180; }
+  // Valor único de inscrição do ENA PROFMAT 2027: R$ 90,00 para todos.
+  var storedValor = 90;
   var vagaInfo = {
     titulo: d.VAGA || d.__cargo_titulo || d.__vaga_label || '',
     valor: storedValor,
