@@ -1,0 +1,23 @@
+{
+  "summary": "Frontend validation testing on /dados-inscricao.html for CONTINUAR button enablement rules. All 5 test cases passed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "test1_initial_no_institution_disabled": "PASS (disabled=true)",
+    "test2_checkbox_only_no_inst_disabled": "PASS (disabled=true)",
+    "test3_inst+radios_default_no+checkbox_enabled": "PASS (disabled=false)",
+    "test4_uncheck_declaro_disabled_again": "PASS (disabled=true)",
+    "test5_click_continue_navigates": "PASS (navigated to /confirmacao.html)"
+  },
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Button enablement logic on dados-inscricao.html works correctly. The <a id=bt-continuar-dados> toggles 'disabled' class based on institution selection (d-polo-trab hidden input), 3 radio groups (cota-negros/cota-pcd/atend-especial, default 'Não'), and d-declaro checkbox. Institution selection tested via typing 'UnB' into #inst-busca and clicking [data-testid=inst-card]. Navigation to /confirmacao.html works when enabled."
+}
