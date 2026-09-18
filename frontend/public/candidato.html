@@ -70,7 +70,16 @@
  <span class=text-red-600 aria-hidden=true>*</span>
  </label>
  
- <input id=password name=password type=password required class="block w-full rounded-lg border bg-white px-3 py-2.5 text-ui text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500 border-slate-300 focus:border-emerald-500 focus:ring-emerald-200" autocomplete=current-password>
+ <div style="position:relative">
+<input id=password name=password type=password required style="padding-right:2.75rem" class="block w-full rounded-lg border bg-white px-3 py-2.5 text-ui text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:ring-2 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500 border-slate-300 focus:border-emerald-500 focus:ring-emerald-200" autocomplete=current-password data-testid="candidato-password-input">
+<button type=button id=toggle-password data-testid="toggle-password-visibility" aria-label="Mostrar senha" style="position:absolute;top:0;bottom:0;right:0;display:flex;align-items:center;padding:0 .75rem;color:#94a3b8;background:none;border:0;cursor:pointer">
+<svg id=icon-eye xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+<svg id=icon-eye-off style="display:none" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 0 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+</button>
+</div>
+<p id=login-error data-testid="login-error" style="display:none;margin-top:.375rem;color:#dc2626;font-weight:600" class="text-caption">
+Usuário não cadastrado, faça seu cadastro.
+</p>
  </div>
  <div class="flex flex-wrap items-center justify-between gap-3">
  <div>
@@ -79,21 +88,51 @@
  <span>Manter-me conectado</span>
  </label>
  </div>
- <a href= class="text-ui font-semibold text-emerald-700 hover:text-emerald-800 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
- Esqueci minha senha
- </a>
  </div>
- <button type=submit class="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-ui font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full">
+ <button type=submit id=btn-entrar data-testid="candidato-entrar-button" disabled class="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-ui font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full">
  Entrar
  </button>
  </form>
  <p class="mt-7 text-center text-ui text-slate-600">
  Ainda não possui cadastro?
- <a href=/inscricao class="font-semibold text-emerald-700 hover:text-emerald-800 hover:underline">
+ <a href=/termos.html data-testid="candidato-criar-cadastro" class="font-semibold text-emerald-700 hover:text-emerald-800 hover:underline">
  Criar cadastro
  </a>
  </p>
  </div>
  </section>
  </div>
- </main>
+ <script>
+(function () {
+  var form = document.querySelector('form');
+  var email = document.getElementById('email');
+  var senha = document.getElementById('password');
+  var btn = document.getElementById('btn-entrar');
+  var erro = document.getElementById('login-error');
+  var toggle = document.getElementById('toggle-password');
+  var iconEye = document.getElementById('icon-eye');
+  var iconEyeOff = document.getElementById('icon-eye-off');
+
+  function atualizarBotao() {
+    btn.disabled = !(email.value.trim() && senha.value.trim());
+  }
+  email.addEventListener('input', function () { erro.style.display = 'none'; atualizarBotao(); });
+  senha.addEventListener('input', function () { erro.style.display = 'none'; atualizarBotao(); });
+  atualizarBotao();
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (btn.disabled) return;
+    erro.style.display = 'block';
+  });
+
+  toggle.addEventListener('click', function () {
+    var mostrando = senha.type === 'text';
+    senha.type = mostrando ? 'password' : 'text';
+    iconEye.style.display = mostrando ? 'block' : 'none';
+    iconEyeOff.style.display = mostrando ? 'none' : 'block';
+    toggle.setAttribute('aria-label', mostrando ? 'Mostrar senha' : 'Ocultar senha');
+  });
+})();
+</script>
+</main>
