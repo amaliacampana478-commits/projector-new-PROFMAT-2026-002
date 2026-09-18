@@ -534,6 +534,14 @@ function __handleDocTipo(v){
       if(el.id==='EMAIL' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) ok=false;
       if(el.id==='CEP' && !/^\d{5}-?\d{3}$/.test(v)) ok=false;
     }
+    var _s1 = document.getElementById('SENHA');
+    var _s2 = document.getElementById('SENHA_CONFIRM');
+    var _serr = document.getElementById('SENHA_ERR');
+    if(_s1 && _s2){
+      var _mismatch = (_s2.value.length > 0 && _s1.value !== _s2.value);
+      if(_serr) _serr.style.display = _mismatch ? 'block' : 'none';
+      if(_mismatch || _s2.value.length === 0) ok = false;
+    }
     btn.disabled = !ok;
     btn.style.opacity = ok ? '1' : '0.5';
     btn.style.cursor  = ok ? 'pointer' : 'not-allowed';
