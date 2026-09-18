@@ -266,14 +266,6 @@
           <label for="inst-uf">UF</label>
           <select id="inst-uf" data-testid="inst-uf"><option value="">Todas as UFs</option></select>
         </div>
-        <div class="inst-sel">
-          <label for="inst-regiao">Região</label>
-          <select id="inst-regiao" data-testid="inst-regiao">
-            <option value="">Todas as regiões</option>
-            <option>Centro-Oeste</option><option>Nordeste</option><option>Norte</option><option>Sudeste</option><option>Sul</option>
-          </select>
-        </div>
-        <button type="button" id="inst-limpar" data-testid="inst-limpar" class="inst-clear">Limpar filtros</button>
       </div>
       <div class="inst-count-row">
         <span class="inst-count"><b id="inst-count">0</b> instituições encontradas</span>
@@ -711,7 +703,6 @@ document.addEventListener('DOMContentLoaded',function(){
   ];
   var grid=document.getElementById('inst-grid'); if(!grid) return;
   var busca=document.getElementById('inst-busca'), selUF=document.getElementById('inst-uf'),
-      selReg=document.getElementById('inst-regiao'), btnLimpar=document.getElementById('inst-limpar'),
       countEl=document.getElementById('inst-count'), hidden=document.getElementById('d-polo-trab');
   var selectedKey=null;
   var icoBank='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 18 0"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg>';
@@ -733,9 +724,13 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   function norm(s){return (s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
   function render(){
-    var q=norm(busca.value), uf=selUF.value, reg=selReg.value;
+    var q=norm(busca.value), uf=selUF.value;
+    if(busca.value.trim()==='' && uf===''){
+      countEl.textContent='0';
+      grid.innerHTML='<div class="inst-empty">Digite no campo "Buscar instituição" ou selecione uma UF para ver as instituições disponíveis.</div>';
+      return;
+    }
     var list=INST.filter(function(i){
-      if(reg && i.r!==reg) return false;
       if(uf && i.u!==uf) return false;
       if(q){ if(norm(i.s+' '+i.c+' '+i.u+' '+i.r).indexOf(q)<0) return false; }
       return true;
@@ -760,8 +755,6 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   busca.addEventListener('input',render);
   selUF.addEventListener('change',render);
-  selReg.addEventListener('change',render);
-  btnLimpar.addEventListener('click',function(){ busca.value='';selUF.value='';selReg.value='';render(); });
   render();
 })();
 </script>
