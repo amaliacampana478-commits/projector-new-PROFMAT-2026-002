@@ -808,4 +808,21 @@ em Matemática em Rede Nacional</p>
   });
 })();
 </script>
+<script>
+(function(){
+  document.querySelectorAll('.doc-file-input').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      var nameEl = document.getElementById(inp.id + '_name');
+      if(!nameEl) return;
+      if(inp.files && inp.files.length){
+        nameEl.textContent = inp.files[0].name;
+        nameEl.classList.add('has-file');
+      } else {
+        nameEl.textContent = 'Nenhum arquivo selecionado';
+        nameEl.classList.remove('has-file');
+      }
+    });
+  });
+})();
+</script>
 </body></html>
