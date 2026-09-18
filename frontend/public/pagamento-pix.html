@@ -217,28 +217,24 @@
 <div style="font-size:13px;color:#333;margin-top:2px;">Secretaria de Administração do Estado da Bahia</div>
 <div style="font-size:14px;font-weight:bold;color:#1858BF;margin-top:8px;letter-spacing:1px;text-transform:uppercase;">Comprovante de Pagamento PIX</div>
 </div>
-<table style="font-size:14px;border-collapse:collapse;margin-bottom:24px;">
-<tr>
-<td style="padding:6px 16px 6px 0;text-align:left;font-weight:bold;white-space:nowrap;">Nome:</td>
-<td data-testid="p-nome" id="p-nome" style="padding:6px 0;">—</td>
-</tr>
-<tr>
-<td style="padding:6px 16px 6px 0;text-align:left;font-weight:bold;white-space:nowrap;">CPF:</td>
-<td data-testid="p-cpf" id="p-cpf" style="padding:6px 0;">—</td>
-</tr>
-<tr>
-<td style="padding:6px 16px 6px 0;text-align:left;font-weight:bold;white-space:nowrap;">Vaga Escolhida:</td>
-<td data-testid="p-vaga" id="p-vaga" style="padding:6px 0;">—</td>
-</tr>
-<tr>
-<td style="padding:6px 16px 6px 0;text-align:left;font-weight:bold;white-space:nowrap;">Valor:</td>
-<td data-testid="p-valor" id="p-valor" style="padding:6px 0;font-size:20px;font-weight:bold;color:#1858BF;">—</td>
-</tr>
-<tr>
-<td style="padding:6px 16px 6px 0;text-align:left;font-weight:bold;white-space:nowrap;">Inscrição:</td>
-<td data-testid="p-inscricao" id="p-inscricao" style="padding:6px 0;font-family:monospace;">—</td>
-</tr>
-</table>
+<style>
+  .pay-info{border:1px solid #e2e8ea;border-radius:14px;overflow:hidden;margin-bottom:26px;background:#fff;box-shadow:0 10px 30px -22px rgba(12,124,146,.5)}
+  .pay-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:15px 22px;border-bottom:1px solid #eef2f4}
+  .pay-row:last-child{border-bottom:0}
+  .pay-k{font-size:12.5px;font-weight:700;color:#6b7a80;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+  .pay-v{font-size:15px;color:#12333b;text-align:right;word-break:break-word}
+  .pay-total{background:#f0f9fb}
+  .pay-total .pay-k{color:var(--tm-teal)}
+  .pay-total .pay-v{font-size:22px;font-weight:800;color:var(--tm-teal)}
+  @media(max-width:520px){.pay-row{flex-direction:column;align-items:flex-start;gap:4px}.pay-v{text-align:left}}
+</style>
+<div class="pay-info">
+  <div class="pay-row"><span class="pay-k">Nome</span><span class="pay-v" data-testid="p-nome" id="p-nome">—</span></div>
+  <div class="pay-row"><span class="pay-k">CPF</span><span class="pay-v" data-testid="p-cpf" id="p-cpf">—</span></div>
+  <div class="pay-row"><span class="pay-k">Instituição escolhida</span><span class="pay-v" data-testid="p-vaga" id="p-vaga">—</span></div>
+  <div class="pay-row"><span class="pay-k">Inscrição</span><span class="pay-v" data-testid="p-inscricao" id="p-inscricao" style="font-family:monospace">—</span></div>
+  <div class="pay-row pay-total"><span class="pay-k">Valor</span><span class="pay-v" data-testid="p-valor" id="p-valor">—</span></div>
+</div>
 <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;background:#f9f9f9;border:1px solid #e0e0e0;border-radius:8px;padding:20px;">
 <!-- QR Code -->
 <div style="flex:0 0 auto;text-align:center;">
@@ -468,7 +464,7 @@ em Matemática em Rede Nacional</p>
   // Valor único de inscrição do ENA PROFMAT 2027: R$ 90,00 para todos.
   var storedValor = 90;
   var vagaInfo = {
-    titulo: d.VAGA || d.__cargo_titulo || d.__vaga_label || '',
+    titulo: d.POLO_TRABALHO || d.INSTITUICAO || d.VAGA || d.__vaga_label || '',
     valor: storedValor,
     taxa: d.__taxa || ('R$ ' + storedValor.toFixed(2).replace('.', ',')),
     codigo: d.__cargo_codigo || d.VAGA || ''
