@@ -223,11 +223,11 @@
     </div>
   </div>
   <div class="conf-section">
-    <div class="conf-head">Opções de prova</div>
+    <div class="conf-head">Instituição Associada</div>
     <div class="conf-grid">
-      <div class="conf-item conf-full"><span class="conf-label">Cargo escolhido</span><span class="conf-val" id="c-cargo-nome">—</span></div>
-      <div class="conf-item"><span class="conf-label">Polo de prova (UF)</span><span class="conf-val" id="c-uf-prova">—</span></div>
-      <div class="conf-item"><span class="conf-label">Polo de prova</span><span class="conf-val" id="c-municipio-prova">—</span></div>
+      <div class="conf-item conf-full"><span class="conf-label">Instituição escolhida</span><span class="conf-val" id="c-cargo-nome">—</span></div>
+      <div class="conf-item"><span class="conf-label">UF da instituição</span><span class="conf-val" id="c-uf-prova">—</span></div>
+      <div class="conf-item"><span class="conf-label">Cidade da instituição</span><span class="conf-val" id="c-municipio-prova">—</span></div>
     </div>
   </div>
   <div class="conf-section">
@@ -332,5 +332,39 @@ document.addEventListener('DOMContentLoaded',function(){
     setTimeout(function(){ window.location.href='/inscricao-realizada'; }, 1000);
   }, true);
 });
+</script><script id="conf-fill">
+(function(){
+  document.addEventListener('DOMContentLoaded',function(){
+    var d={}; try{ d=JSON.parse(sessionStorage.getItem('inscricao_dados')||'{}'); }catch(e){}
+    function set(id,val){ var el=document.getElementById(id); if(el){ var v=(val==null||val==='')?'—':val; el.textContent=v; } }
+    var cpf=(d.CPF||'').replace(/\D/g,'');
+    var protocolo = d.__protocolo || d.__requerimento || (cpf?('2026'+cpf.slice(-6).padStart(6,'0')):'');
+    var sexo = d.SEXO==='0'?'MASCULINO':(d.SEXO==='1'?'FEMININO':(d.SEXO||''));
+    var arquivos=[d.DOC_FRENTE_NAME,d.DOC_VERSO_NAME].filter(Boolean).join(', ');
+    var bool=function(b){ return b===true?'Sim':(b===false?'Não':'—'); };
+    set('c-nome', d.NOME);
+    set('c-inscricao', protocolo);
+    set('c-cpf', d.CPF);
+    set('c-data', d.DATA_NASCIMENTO);
+    set('c-sexo', sexo);
+    set('c-doc', d.DOC_TIPO);
+    set('c-arquivos', arquivos);
+    set('c-celular', d.CELULAR);
+    set('c-email', d.EMAIL);
+    set('c-cep', d.CEP);
+    set('c-logradouro', d.LOGRADOURO);
+    set('c-numero', d.NUMERO);
+    set('c-complemento', d.COMPLEMENTO);
+    set('c-bairro', d.BAIRRO);
+    set('c-cidade', d.CIDADE);
+    set('c-uf', d.UF);
+    set('c-cargo-nome', d.POLO_TRABALHO || d.INSTITUICAO || '');
+    set('c-uf-prova', d.INSTITUICAO_UF);
+    set('c-municipio-prova', d.INSTITUICAO_CIDADE);
+    set('c-negros', bool(d.cotas_negros));
+    set('c-pcd', bool(d.PORTADOR_DEFICIENCIA));
+    set('c-atendimento', bool(d.atendimento_especial));
+  });
+})();
 </script>
 </body></html>
