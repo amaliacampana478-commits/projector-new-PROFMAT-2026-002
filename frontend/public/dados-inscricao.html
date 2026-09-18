@@ -505,6 +505,8 @@ em Matemática em Rede Nacional</p>
     var chk=document.getElementById('d-declaro');
     function ok(){
       for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]); if(!el||!String(el.value||'').trim()) return false;}
+      var radios=['cota-negros','cota-pcd','atend-especial'];
+      for(var r=0;r<radios.length;r++){ if(!document.querySelector('input[name="'+radios[r]+'"]:checked')) return false; }
       if(chk && !chk.checked) return false;
       return true;
     }
