@@ -1,5 +1,5 @@
 /* ============================================================
-   Painel Admin — extras (Transpetro)
+   Painel Admin — extras (PROFMAT 2027)
    Adiciona um botão "Limpar Cadastros" na página /donaspainel/cadastro
    sem precisar mexer no build React.
    ============================================================ */

