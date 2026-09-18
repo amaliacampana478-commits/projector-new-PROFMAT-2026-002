@@ -1,0 +1,19 @@
+{
+  "summary": "Frontend-only test of file upload indication on /inscricao.html for DOC_FRENTE and DOC_VERSO inputs. Both inputs correctly update their name label element with the file name and receive the 'has-file' CSS class after selection. Bug is fixed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "Created temporary /tmp/frente_test.png and /tmp/verso_test.pdf",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The change listener on .doc-file-input works: after set_input_files on #DOC_FRENTE the #DOC_FRENTE_name element text becomes 'frente_test.png' with class 'doc-file-name has-file'. Same works for #DOC_VERSO -> 'verso_test.pdf'. No 'Nenhum arquivo selecionado' persistence issue.",
+  "rca of the issue": "Original bug: file inputs had opacity:0 overlay and no change listener, so selecting a file did not update the visible label. Fix added querySelectorAll('.doc-file-input').forEach change handler that sets textContent to files[0].name and adds 'has-file' class. Verified working via Playwright set_input_files."
+}
