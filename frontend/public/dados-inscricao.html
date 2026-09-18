@@ -234,26 +234,6 @@
   <form id="form-dados" class="insc-form" autocomplete="off" novalidate>
 
     <fieldset class="insc-group">
-      <legend>Vaga</legend>
-      <div class="insc-field">
-        <label for="d-edital">Edital *</label>
-        <select id="d-edital" data-testid="dados-edital">
-          <option value="">Selecione o edital</option>
-          <option value="2026.1">ENA PROFMAT/PSP/MAR-2026.1 - ANEXO III - CARGOS E REQUISITOS</option>
-          <option value="2026.2">ENA PROFMAT/PSP/MAR-2026.2 - ANEXO III - CARGOS E REQUISITOS</option>
-          <option value="2026.3">ENA PROFMAT/PSP/TERRA/NÍVEL MÉDIO - 2026.3 - ANEXO III - ÊNFASES E REQUISITOS</option>
-          <option value="2026.4">ENA PROFMAT/PSP/TERRA/NÍVEL SUPERIOR - 2026.4 - ANEXO III - ÊNFASES E REQUISITOS</option>
-        </select>
-      </div>
-      <div class="insc-field">
-        <label for="d-cargo">Cargo *</label>
-        <select id="d-cargo" data-testid="dados-cargo" disabled>
-          <option value="">Selecione primeiro o edital</option>
-        </select>
-      </div>
-    </fieldset>
-
-    <fieldset class="insc-group">
       <legend>Instituição Associada</legend>
       <p class="inst-sub">Selecione a instituição na qual pretende cursar o PROFMAT. Observe atentamente a cidade, a quantidade de vagas e os dias e turnos das aulas.</p>
       <div class="inst-note">A Instituição Associada pode ser alterada até 21/09/2026 às 17h00 (horário de Brasília), mesmo depois da finalização ou do pagamento. Se a inscrição já estiver finalizada, a alteração fará com que ela precise ser finalizada novamente.</div>
@@ -530,7 +510,7 @@ em Matemática em Rede Nacional</p>
   document.addEventListener('DOMContentLoaded',function(){
     var btn=document.getElementById('bt-continuar-dados');
     if(!btn) return;
-    var ids=['d-edital','d-cargo','d-polo-trab','d-uf','d-polo-prova'];
+    var ids=['d-polo-trab','d-uf','d-polo-prova'];
     var chk=document.getElementById('d-declaro');
     function ok(){
       for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]); if(!el||!String(el.value||'').trim()) return false;}
