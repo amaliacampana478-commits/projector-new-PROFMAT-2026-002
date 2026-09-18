@@ -1,0 +1,26 @@
+{
+  "summary": "Frontend-only testing of /candidato static HTML login page. All 6 requested behaviors verified successfully via Playwright automation.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "entrar_disabled_when_empty": "PASS - button disabled=true on load",
+    "entrar_enabled_after_filling": "PASS - button enabled after email+password filled",
+    "error_message_on_submit": "PASS - 'Usuário não cadastrado, faça seu cadastro.' visible in red (rgb(220,38,38)), URL remained /candidato (no navigation)",
+    "toggle_password_visibility": "PASS - type toggled password -> text -> password",
+    "criar_cadastro_link": "PASS - href=/termos.html, click navigates to /termos.html",
+    "no_esqueci_minha_senha": "PASS - text not present on page"
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The /candidato page is served as a static HTML from /app/frontend/public/candidato.html via a craco middleware. All required behaviors work correctly."
+}
