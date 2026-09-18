@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend-only testing of /dados-inscricao.html novo seletor 'Instituição Associada'. Todos os 6 cenários solicitados passaram: contador inicial 76, filtros por região (Centro-Oeste=13, Nordeste=32, Norte=14, Sul=17, Sudeste=0), filtro combinado (Sul+curitiba=2), Limpar reseta para 76, filtro UF=GO=3, seleção de card aplica classe 'sel' e preenche id=d-polo-trab no formato 'SIGLA - CIDADE/UF', e integração com validação do botão CONTINUAR (id=bt-continuar-dados) — sem card selecionado o botão recebe classe 'disabled'; com Edital, Cargo, UF, Polo de prova, checkbox d-declaro E card selecionado, a classe 'disabled' é removida.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Botão CONTINUAR é um <a>, portanto usa classe CSS 'disabled' ao invés do atributo disabled. O handler de clique verifica btn.classList.contains('disabled') antes de navegar — funciona, mas para leitores de tela e testes automatizados o ideal seria também aplicar aria-disabled='true' no <a> para melhor acessibilidade.",
+    "Validação no script #continuar-dados-validate está correta: checa ids ['d-edital','d-cargo','d-polo-trab','d-uf','d-polo-prova'] + checkbox d-declaro, e revalida em qualquer evento change bubbling (useCapture=true) — bem robusto."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Novo seletor 'Instituição Associada' totalmente funcional. Contagens por região validadas: Centro-Oeste=13, Nordeste=32, Norte=14, Sul=17, Sudeste=0, Total=76. UF=GO=3, Sul+curitiba=2. Card ao ser clicado ganha classe 'sel' e preenche d-polo-trab='SIGLA - CIDADE/UF' (ex: 'UnB - Brasília/DF'). Botão CONTINUAR usa classe CSS 'disabled' (é um <a>), corretamente alternada pelo validator quando todos os campos + card + checkbox estão preenchidos."
+}
