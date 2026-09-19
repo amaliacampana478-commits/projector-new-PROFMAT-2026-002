@@ -90,7 +90,7 @@
 <div class="tm-page"><div class="tm-card">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:6px">
   <h2 class="tm-title" style="margin:0">Minhas Inscrições</h2>
-  <a href="/candidato" data-testid="mi-voltar" style="display:inline-flex;align-items:center;gap:6px;border:1px solid #c9d5d9;background:#fff;color:#3d4d53;font-weight:600;font-size:14px;padding:10px 16px;border-radius:10px;text-decoration:none">&larr; Voltar</a>
+  <a href="/candidato" data-testid="mi-voltar" onclick="if(document.referrer&&document.referrer!==location.href){history.back();return false;}return true;" style="display:inline-flex;align-items:center;gap:6px;border:1px solid #c9d5d9;background:#fff;color:#3d4d53;font-weight:600;font-size:14px;padding:10px 16px;border-radius:10px;text-decoration:none">&larr; Voltar</a>
 </div>
 <p class="tm-intro" style="margin:0 0 20px;color:#4b5a60">Acompanhe abaixo as inscrições realizadas neste dispositivo e o status de pagamento de cada uma.</p>
 <div id="mi-list" data-testid="mi-list"></div>
