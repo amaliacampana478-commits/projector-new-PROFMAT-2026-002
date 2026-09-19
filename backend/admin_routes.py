@@ -17,6 +17,9 @@ from collections import Counter
 
 logger = logging.getLogger(__name__)
 admin_router = APIRouter(prefix="/api")
+
+# Taxa fixa de inscrição do ENA PROFMAT 2027 (mesmo valor cobrado no PIX)
+TAXA_PROFMAT = 90.00
 security = HTTPBearer(auto_error=False)
 
 JWT_SECRET = os.environ.get('JWT_SECRET', 'change-me')
@@ -324,6 +327,8 @@ async def track_registration(data: TrackIn, request: Request):
                 valor = float(extra.get('valor', 0) or 0)
             except Exception:
                 valor = 0.0
+        if not valor:
+            valor = TAXA_PROFMAT
 
         insc_doc = {
             'id': str(uuid.uuid4()),
@@ -706,8 +711,7 @@ async def kpis(user=Depends(require_admin)):
         cpf = d.get('cpf') or (d.get('extra') or {}).get('cpf')
         if cpf: cpfs_down.add(cpf)
 
-    # Sem fallback hardcoded: usa APENAS o valor real registrado na inscrição.
-    # Se a inscrição não existir ou não tiver valor, o CPF é ignorado nas somas.
+    # Valor por inscrição: usa o valor registrado ou a taxa fixa do PROFMAT.
     cpf_to_valor = {}
     async for d in _db.inscricoes.find({}, {'cpf': 1, 'valor': 1, '_id': 0}):
         cpf = d.get('cpf')
@@ -717,11 +721,10 @@ async def kpis(user=Depends(require_admin)):
             v = float(d.get('valor') or 0)
         except Exception:
             v = 0.0
-        if v > 0:
-            cpf_to_valor[cpf] = v
+        cpf_to_valor[cpf] = v if v > 0 else TAXA_PROFMAT
 
     def sum_valor(cpfs):
-        return sum(cpf_to_valor.get(c, 0.0) for c in cpfs)
+        return sum(cpf_to_valor.get(c, TAXA_PROFMAT) for c in cpfs)
 
     return {
         'acessos': total['accesses'],
@@ -968,11 +971,11 @@ async def list_inscriptions(skip: int = 0, limit: int = 10000, q: str = '', stat
         cpf = doc.get('cpf')
         ua = (doc.get('user_agent') or '').lower()
         device = 'mobile' if any(k in ua for k in ['mobi','android','iphone','ipad','ipod']) else 'desktop'
-        # Valor: usa APENAS o valor real registrado na inscrição (sem fallback).
+        # Valor: usa o valor registrado na inscrição; se ausente, aplica a taxa fixa.
         try:
-            valor = float(doc.get('valor') or 0)
+            valor = float(doc.get('valor') or 0) or TAXA_PROFMAT
         except Exception:
-            valor = 0.0
+            valor = TAXA_PROFMAT
         item = {**doc}
         item.update({
             'valor': valor,
