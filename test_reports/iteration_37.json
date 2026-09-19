@@ -1,0 +1,43 @@
+{
+  "summary": "Mobile footer measurement on /termos.html and / (home) at 390x844 (iPhone 13) and 393x851 (Pixel 5). All target computed styles were applied correctly and no horizontal scroll. Footer height reduced from ~940px to ~865px (~75px, ~8% reduction) – consistent across both pages and devices.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Site footer (mobile /termos.html and /)", "issues": [
+        "Footer altura ainda 865px em ambos dispositivos/páginas. Redução foi apenas ~75px vs ~940px anteriores. Se objetivo era 'bem menor', o resultado está aquém — a altura ainda é grande porque as três áreas de widgets ficam empilhadas em coluna única (logo + SBM, menu 'Saiba Mais' com 7 itens, contato+redes+botão) e o botão 'Fale Conosco' ocupa muito espaço vertical.",
+        "Sugestões para reduzir mais: (a) reduzir margens verticais do logo PROFMAT e do logo SBM (parecem grandes visualmente), (b) diminuir padding vertical do botão 'Fale Conosco' e/ou reduzir sua largura no mobile, (c) reduzir row-gap ainda mais (ex.: 8-10px) entre as 3 áreas, (d) considerar layout em 2 colunas no mobile para os widgets menores."
+      ]}
+    ]
+  },
+  "measurements": {
+    "iphone13_termos": {"footerHeight": 865, "rowGap": "14px", "linkLineHeight": "20.25px", "linkFontSize": "13.5px", "fwPaddingTop": "26px", "fwPaddingBottom": "14px", "horizontalScroll": false, "scrollWidth": 390, "innerWidth": 390},
+    "iphone13_home":   {"footerHeight": 865, "rowGap": "14px", "linkLineHeight": "20.25px", "linkFontSize": "13.5px", "fwPaddingTop": "26px", "fwPaddingBottom": "14px", "horizontalScroll": false, "scrollWidth": 390, "innerWidth": 390},
+    "pixel5_termos":   {"footerHeight": 865, "rowGap": "14px", "linkLineHeight": "20.25px", "linkFontSize": "13.5px", "fwPaddingTop": "26px", "fwPaddingBottom": "14px", "horizontalScroll": false, "scrollWidth": 393, "innerWidth": 393},
+    "pixel5_home":     {"footerHeight": 865, "rowGap": "14px", "linkLineHeight": "20.25px", "linkFontSize": "13.5px", "fwPaddingTop": "26px", "fwPaddingBottom": "14px", "horizontalScroll": false, "scrollWidth": 393, "innerWidth": 393}
+  },
+  "verification_vs_spec": {
+    "row_gap_14px": "PASS (14px)",
+    "link_line_height_1.5": "PASS (20.25px = 1.5 * 13.5px)",
+    "link_font_size_13.5px": "PASS (13.5px)",
+    "footer_padding_top_26px": "PASS (26px)",
+    "no_horizontal_scroll": "PASS (scrollWidth == innerWidth)",
+    "social_icon_38px": "NÃO VERIFICADO DIRETAMENTE — seletor genérico retornou o container de ícones (180px de largura), mas visualmente os ícones aparentam ~38px. Recomenda-se validar via seletor específico do ícone (svg/a interno).",
+    "footer_visibly_smaller": "PARTIAL — reduziu ~75px (940→865). Ainda perceptivelmente alto; ver design_issues."
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Se a meta era 'bem menor' que ~940px, aplicar reduções adicionais: comprimir logo PROFMAT/SBM (max-height menor), reduzir padding do botão 'Fale Conosco' e limitar sua largura, apertar row-gap para ~8-10px, e reduzir margens entre blocos (endereço, CNPJ, menu, contato).",
+    "Adicionar data-testid nos elementos do rodapé (footer container, logo, menu, social icons, botão Fale Conosco) para facilitar testes futuros."
+  ],
+  "critical_code_review_comments": [
+    "Regras de media query aplicadas corretamente; nenhum bug de CSS observado nos valores solicitados."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% (specs aplicados) / parcial no objetivo visual"},
+  "seed_data_creation": "",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Se main agent aplicar novas reduções ao rodapé mobile, medir novamente .site-footer.getBoundingClientRect().height em 390x844 e 393x851 nas rotas /termos.html e /. Alvo sugerido pelo usuário: bem abaixo de 940px; atualmente em 865px."
+}
