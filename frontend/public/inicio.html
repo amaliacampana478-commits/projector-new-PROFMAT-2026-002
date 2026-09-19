@@ -407,3 +407,42 @@ em Matemática em Rede Nacional</p>
   }catch(e){}
 })();
 </script>
+<!-- ===== Modal Aviso Importante (somente página inicial) ===== -->
+<style id="pf-aviso-style">
+#pf-aviso-ov{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(20,32,40,.55);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+#pf-aviso-ov.pf-open{display:flex;animation:pfAvisoFade .25s ease}
+@keyframes pfAvisoFade{from{opacity:0}to{opacity:1}}
+#pf-aviso-card{background:#fff;border-radius:22px;max-width:440px;width:100%;padding:34px 32px 30px;text-align:center;box-shadow:0 30px 70px -20px rgba(12,124,146,.45);animation:pfAvisoUp .32s cubic-bezier(.16,.84,.44,1)}
+@keyframes pfAvisoUp{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+#pf-aviso-card img{height:70px;width:auto;display:block;margin:0 auto 18px}
+#pf-aviso-card h3{margin:0 0 14px;color:#e6a100;font-size:22px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+#pf-aviso-card p{margin:0 0 26px;color:#4b5a60;font-size:15.5px;line-height:1.6}
+#pf-aviso-ok{display:inline-block;border:0;cursor:pointer;background:linear-gradient(180deg,#f2b209,#e09600);color:#fff;font-weight:800;font-size:15px;letter-spacing:.3px;padding:14px 42px;border-radius:999px;box-shadow:0 12px 26px -8px rgba(224,150,0,.7);transition:transform .15s ease,box-shadow .15s ease}
+#pf-aviso-ok:hover{transform:translateY(-2px);box-shadow:0 16px 30px -8px rgba(224,150,0,.8)}
+#pf-aviso-ok:active{transform:translateY(0)}
+@media(max-width:640px){#pf-aviso-card{padding:28px 22px 24px;border-radius:18px}#pf-aviso-card h3{font-size:19px}#pf-aviso-card p{font-size:14.5px}#pf-aviso-card img{height:58px}}
+</style>
+<div id="pf-aviso-ov" data-testid="aviso-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pf-aviso-title">
+  <div id="pf-aviso-card">
+    <img id="pf-aviso-logo" alt="PROFMAT" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <h3 id="pf-aviso-title">Aviso importante</h3>
+    <p>As inscrições para o Exame Nacional de Acesso (ENA) 2027 do PROFMAT encerram-se nesta segunda-feira, dia 21 de setembro, às 23h59min (horário de Brasília).</p>
+    <button type="button" id="pf-aviso-ok" data-testid="aviso-modal-ok">OK, entendi</button>
+  </div>
+</div>
+<script id="pf-aviso-js">
+(function(){
+  try{
+    var ov=document.getElementById('pf-aviso-ov');
+    if(!ov) return;
+    var logo=document.getElementById('pf-aviso-logo');
+    var src=document.querySelector('.header-image, .site-logo img, img.is-logo-image');
+    if(logo && src && src.src) logo.src=src.src;
+    function close(){ ov.classList.remove('pf-open'); }
+    document.getElementById('pf-aviso-ok').addEventListener('click',close);
+    ov.addEventListener('click',function(e){ if(e.target===ov) close(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+    ov.classList.add('pf-open');
+  }catch(e){}
+})();
+</script>
