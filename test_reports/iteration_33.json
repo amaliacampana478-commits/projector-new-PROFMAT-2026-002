@@ -1,0 +1,47 @@
+{
+  "summary": "Mobile-only frontend verification on '/' for iPhone 13 (390x844) and Pixel 5 (393x851). Both viewports meet all requested criteria: intro paragraph font-size == 12px, .cronograma-tabela min-width == 0px, no horizontal overflow on document, and cronograma overflow contained inside .cronograma-wrapper (overflow-x:auto).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "measurements": {
+    "iphone13_390x844": {
+      "intro_font_size": "12px",
+      "intro_text_start": "A Comissão Acadêmica do Programa de Pós-Graduação Profission...",
+      "tabela_min_width": "0px",
+      "tabela_width_px": 368.5,
+      "tabela_font_size": "10.5px",
+      "wrapper_width_px": 370.5,
+      "wrapper_overflow_x": "auto",
+      "wrapper_scrollWidth": 369,
+      "document_scrollWidth": 390,
+      "innerWidth": 390,
+      "html_horizontal_overflow": false
+    },
+    "pixel5_393x851": {
+      "intro_font_size": "12px",
+      "tabela_min_width": "0px",
+      "tabela_width_px": 371.34,
+      "tabela_font_size": "10.5px",
+      "wrapper_width_px": 373.34,
+      "wrapper_overflow_x": "auto",
+      "wrapper_scrollWidth": 371,
+      "document_scrollWidth": 393,
+      "innerWidth": 393,
+      "html_horizontal_overflow": false
+    }
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Media query (max-width:600px) applied correctly; both intro paragraph (12px) and cronograma table (10.5px, min-width:0, width:100%) render as intended. No document-level horizontal scroll on either mobile viewport."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Mobile CSS adjustments in /app/frontend/public/inicio.html verified. Screenshots at /app/.screenshots/iphone13_crono.png and /app/.screenshots/pixel5_crono.png confirm the cronograma is legible and fits inside wrapper, with intro paragraph small (12px) on mobile."
+}
