@@ -13,7 +13,17 @@
 <body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
  <main class="flex min-h-screen items-center justify-center px-4 py-8">
  <div class="grid w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
- <aside class="flex min-h-64 flex-col justify-between bg-slate-950 px-8 py-10 text-white sm:px-10 lg:min-h-[620px]">
+ <style>
+@media (max-width:640px){
+  aside{min-height:0!important;padding:18px 22px!important}
+  aside .mb-10{margin-bottom:12px!important}
+  aside h1{font-size:22px!important;line-height:1.2!important}
+  aside .h-14{height:44px!important;width:44px!important}
+  aside p.mt-4{display:none!important}
+  aside .mt-10{display:none!important}
+}
+</style>
+<aside class="flex min-h-64 flex-col justify-between bg-slate-950 px-8 py-10 text-white sm:px-10 lg:min-h-[620px]">
  <div>
  <div class="mb-10 flex items-center gap-4">
  <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500 font-bold text-slate-950">
