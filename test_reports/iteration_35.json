@@ -1,0 +1,19 @@
+{
+  "summary": "Verified mobile compact aside fix for /candidato. On iPhone13 (390x844) and Pixel5 (393x851), the dark aside height is ~122.4px (well below 220px target, down from ~600px). p.mt-4 and .mt-10 are display:none, h1 font-size is 22px. Login form section top at ~217-220px is well above the fold and fields are accessible. No horizontal scroll (scrollWidth == innerWidth). Desktop layout unchanged (aside 620px, p/foot visible, h1 30px).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "seed_data_creation": "",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Mobile compact fix for /candidato aside is confirmed working. Measurements: iPhone13 aside height=122.39px, sectionTop=217.19px; Pixel5 aside height=122.39px, sectionTop=220.69px; both have p.mt-4 display:none, .mt-10 display:none, h1 22px, no horizontal overflow. Desktop preserves original layout.",
+  "rca of the issue": "N/A - fix verified"
+}
