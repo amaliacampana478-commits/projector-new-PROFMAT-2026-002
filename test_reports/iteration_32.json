@@ -1,0 +1,25 @@
+{
+  "summary": "Mobile responsiveness testing (iPhone 13 390x844 and Pixel 5 393x851) across ALL 9 modified pages of the PROFMAT project (/, /candidato, /termos.html, /inscricao.html, /dados-inscricao.html, /confirmacao.html, /pagamento-pix.html, /inscricao-realizada.html, /minhas-inscricoes.html). Result: NO horizontal document scrolling on any page/device (document.documentElement.scrollWidth == window.innerWidth for all 18 combinations). All key interactive elements are present, correctly sized for touch, and clickable. Details per page: (1) / (inicio.html) - POST /api/track/access fires exactly 1x (200), 'Realizar inscrição' CTA visible at bottom (bbox 370x50, href=/candidato); the cronograma table (700px wide) is safely wrapped in .cronograma-wrapper with overflow-x:auto so the horizontal scroll stays inside the wrapper and does NOT overflow the document. (2) /candidato - email + password inputs, eye toggle icon, 'Entrar' submit button and 'Criar cadastro' link all rendered without overflow. (3) /termos.html - checkbox (clickable, >10px), Continuar/Voltar buttons stacked vertically, Edital PDF link points to /docs/edital-ena-profmat-2027.pdf. (4) /inscricao.html - 2 password fields, both eye icons ARE aligned INSIDE the input (inField:true for both), 2 file inputs present. (5) /dados-inscricao.html - #inst-uf, #inst-busca, #bt-continuar-dados all present; UF+Busca filters STACK vertically on mobile; instituição grid uses single column (grid-template-columns: 242px); typing 'UnB' in #inst-busca correctly shows 2 UnB cards, clickable. (6) /confirmacao.html - loads cleanly, body height 3630px, no overflow. (7) /pagamento-pix.html - nav.pf-topnav with 'Minhas inscrições' button rendered, .menu-toggle hidden (as expected for enxuto layout). (8) /inscricao-realizada.html - pf-topnav + 'Pagar' button visible. (9) /minhas-inscricoes.html - after seeding sessionStorage.inscricao_dados, protocolo 2026001771 is displayed on the card together with Pagar inscrição / Ver comprovante / Voltar buttons, all stacked on mobile with no overflow. Same results on Pixel 5 viewport (393x851).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/ (inicio.html)", "issues": ["On mobile (<=768px) the full GeneratePress .main-navigation nav is set to display:none AND the .menu-toggle (hamburger) button is ALSO display:none, so on iPhone/Android the header shows only the PROFMAT logo without any accessible menu. This does not cause overflow (spec accepted 'ou não causar overflow'), but from a UX standpoint users have no way to reach Home/Organização/Coordenação Nacional links from mobile. Consider either enabling the .menu-toggle at mobile widths or providing an alternate mobile nav."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Low priority / UX only) On inicio.html for mobile viewports, either show the .menu-toggle hamburger button (currently display:none) or provide an alternate way to reach header nav links. All 75 header menu links exist in DOM but are hidden with no toggle affordance on mobile."
+  ],
+  "critical_code_review_comments": [
+    "cronograma-tabela is 700px wide (much wider than mobile viewport); it is currently rescued by .cronograma-wrapper{overflow-x:auto} which correctly contains the horizontal scroll inside the wrapper – good pattern, keep it."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped)", "frontend": "100% (18/18 page/device combinations with no horizontal overflow; all key elements present and interactable)"},
+  "test_credentials": "Not used (frontend-only mobile responsiveness testing).",
+  "seed_data_creation": "sessionStorage.inscricao_dados = {NOME:'Teste',CPF:'202.580.017-71',POLO_TRABALHO:'UFAL - Arapiraca/AL',INSTITUICAO:'UFAL',__protocolo:'2026001771'} used only to render the card on /minhas-inscricoes.html.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 9 modified pages pass mobile responsiveness at 390x844 (iPhone 13) and 393x851 (Pixel 5): document scrollWidth == innerWidth on every page. The only remark is UX-level: on inicio.html the .menu-toggle hamburger is hidden on mobile, so the header on mobile shows only the logo. If a hamburger is desired, the CSS rule hiding .menu-toggle at mobile must be removed / adjusted (GeneratePress default expects .menu-toggle{display:block} at <=768px)."
+}
