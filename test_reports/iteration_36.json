@@ -1,0 +1,42 @@
+{
+  "summary": "Tested mobile layout of /termos.html on iPhone 13 (390x844) and Pixel 5 (393x851). All requested criteria pass: .tm-card and .tm-box are transparent, borderless, and shadowless on mobile; content uses full viewport width; text left-aligned; no horizontal overflow; footer compacted. Desktop preserved with white card, border, and shadow.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "iphone13_390x844": {
+      "tm-card": {"borderWidth": "0px", "boxShadow": "none", "background": "rgba(0,0,0,0)", "width": "390px (100% viewport)"},
+      "tm-box": {"borderWidth": "0px", "background": "rgba(0,0,0,0)"},
+      "tm-box p text-align": "left",
+      "scrollWidth vs innerWidth": "390 == 390 (no horizontal scroll)",
+      "footer .footer-widgets padding-top": "26px",
+      "inside-footer-widgets flex-direction": "column",
+      "footer height": "941.3px",
+      "checkbox present": true,
+      "buttons found": 1
+    },
+    "pixel5_393x851": {
+      "tm-card": {"borderWidth": "0px", "boxShadow": "none", "background": "rgba(0,0,0,0)", "width": "393px (100% viewport)"},
+      "tm-box": {"borderWidth": "0px", "background": "rgba(0,0,0,0)"},
+      "tm-box p text-align": "left",
+      "scrollWidth vs innerWidth": "393 == 393 (no horizontal scroll)",
+      "footer .footer-widgets padding-top": "26px",
+      "inside-footer-widgets flex-direction": "column"
+    },
+    "desktop_1280": {
+      "tm-card": {"background": "rgb(255,255,255)", "borderWidth": "1px", "boxShadow": "rgba(12,124,146,0.45) 0px 18px 44px -26px"}
+    }
+  },
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Footer height on mobile is still ~941px which is large due to stacked content; if further reduction desired, consider tightening column gaps and widget internal paddings. Not blocking."
+  ],
+  "updated_files": [],
+  "success_rate": {"frontend": "100%"},
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Mobile flattening at max-width:640px is working correctly on /termos.html: .tm-card and .tm-box render transparent/borderless/shadowless, text is left-aligned, and full viewport width is used. No horizontal scroll. Footer .footer-widgets padding-top=26px and flex-direction=column. Checkbox and CONTINUAR button remain visible. Desktop unchanged (white card with border+shadow)."
+}
