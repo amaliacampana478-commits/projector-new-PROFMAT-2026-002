@@ -329,6 +329,8 @@ async def track_registration(data: TrackIn, request: Request):
                 valor = 0.0
         if not valor:
             valor = TAXA_PROFMAT
+        # Texto da taxa sempre coerente com o valor numérico
+        taxa_str = 'R$ {:,.2f}'.format(valor).replace(',', 'X').replace('.', ',').replace('X', '.')
 
         insc_doc = {
             'id': str(uuid.uuid4()),
@@ -977,8 +979,10 @@ async def list_inscriptions(skip: int = 0, limit: int = 10000, q: str = '', stat
         except Exception:
             valor = TAXA_PROFMAT
         item = {**doc}
+        taxa_txt = 'R$ {:,.2f}'.format(valor).replace(',', 'X').replace('.', ',').replace('X', '.')
         item.update({
             'valor': valor,
+            'taxa': taxa_txt,
             'status': compute_status(doc),
             'device': device,
         })
